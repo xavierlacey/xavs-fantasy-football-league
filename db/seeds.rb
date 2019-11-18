@@ -153,6 +153,16 @@ csv.each do |fixture|
   )
 end
 
+def playing_chancer(status, news)
+  if status == "a"
+    return "_100"
+  elsif status == "i" || status =="u" || status == "s" || status == "n"
+    return "_0"
+  else 
+    return "_" << news.gsub(/[^0-9]/, '')
+  end
+end
+
 # players
 players.each do |player|
   flonx_player = Player.where(id: player['id'])
@@ -162,6 +172,9 @@ players.each do |player|
   full_name = "#{player['first_name']} #{player['second_name']}"
   position = position(player['element_type'])
   picture = player['photo'].tr('.jpg','')
+  status = player['status']
+  news = player['news']
+  chance_of_playing = playing_chancer(status, news)
 
   # Get specific player url
   url = "https://fantasy.premierleague.com/api/element-summary/#{player['id'].to_s}/"
@@ -183,7 +196,10 @@ players.each do |player|
     :position => position,
     :premier_league_team_id => player['team'],
     :picture => picture,
-    :gameweek_points => { 1 => 0 },    
+    :gameweek_points => { 1 => 0 },
+    :status => status,
+    :news => news,
+    :chance_of_playing => chance_of_playing
   )
 
   puts "done #{full_name}" if (player['id'].to_i % 50).zero?
