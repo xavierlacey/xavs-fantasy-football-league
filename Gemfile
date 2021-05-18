@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '4.3.1'
 gem 'mini_magick', '4.9.4'
 gem "nokogiri", ">= 1.10.4"
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 gem 'rails', '~> 5.1.2'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
